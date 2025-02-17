@@ -1,31 +1,50 @@
+# .github/workflows/deploy.yml
 name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main # Trigger the action
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3 # Checks out your repository to be used in the workflow
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3 # Set up Node.js environment
+      - name: Set up Node
+        uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: 20
+          cache: "yarn"
 
       - name: Install dependencies
-        run: yarn install # Installs the project dependencies
+        run: yarn install
 
-      - name: Build the project
-        run: yarn build # Adjust this if your build command is different (e.g., for React, Vue, etc.)
+      - name: Build
+        run: yarn run build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "./dist"
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3 # Automatically deploys to GitHub Pages
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }} # GitHub token to authenticate the action
-          publish_dir: ./dist # Replace this with the path to your build directory (e.g., ./dist, ./build)
+        id: deployment
+        uses: actions/deploy-pages@v4
