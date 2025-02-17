@@ -1,5 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Carter+One&display=swap");
 @import url("https://cdn.jsdelivr.net/npm/pretendard/dist/pretendard.css");
 @import "tailwindcss";
+
+h1 {
+  font-family: "Carter One", serif;
+  font-weight: 400;
+  font-size: 48px;
+}
 
 body {
   margin: 0;
