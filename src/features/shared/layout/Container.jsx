@@ -1,8 +1,7 @@
-import { FunctionComponent } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { PATH_PROJECT, PATH_WORK } from "../constants/path";
 
-const LayoutContainer: FunctionComponent = () => {
+const LayoutContainer = () => {
   return (
     <div className="layout-container">
       <header className="sticky top-0 z-10 backdrop-filter backdrop-blur-sm bg-opacity-40 border-b border-gray-200">
