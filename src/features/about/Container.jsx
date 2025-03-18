@@ -9,7 +9,7 @@ import PageTitle from "../shared/components/PageTitle";
 import useAbout from "./useAbout";
 
 const AboutContainer = () => {
-  const { randomMe, randomDecorationText, randomColor } = useAbout();
+  const { randomMe, decorationText, color } = useAbout();
 
   return (
     <main className="p-4">
@@ -21,9 +21,9 @@ const AboutContainer = () => {
           <PageTitle>Jiyoung Lim</PageTitle>
           <h3 className="text-center">
             <span
-              className={`${randomColor} bg-clip-text text-transparent font-semibold`}
+              className={`${color} bg-clip-text text-transparent font-semibold`}
             >
-              {randomDecorationText}
+              {decorationText}
             </span>{" "}
             Software Engineer
           </h3>
