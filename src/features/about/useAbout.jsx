@@ -1,15 +1,12 @@
 import { useState, useEffect } from "react";
 import Profile1 from "/img/profile1.jpeg";
-import Profile2 from "/img/profile1.jpeg";
-import Profile3 from "/img/profile1.jpeg";
-import Profile4 from "/img/profile1.jpeg";
-import Profile5 from "/img/profile1.jpeg";
+import Profile2 from "/img/profile2.png";
 
 const useAbout = () => {
   const [decorationText, setDecorationText] = useState("");
   const [color, setColor] = useState("");
 
-  const me = [Profile1, Profile2, Profile3, Profile4, Profile5];
+  const me = [Profile1, Profile2];
   const randomMe = me[Math.floor(Math.random() * me.length)];
 
   const deco = ["🔥", "Professional", "🚀", "Detail-Oriented", "Your fellow"];

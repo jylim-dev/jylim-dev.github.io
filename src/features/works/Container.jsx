@@ -4,8 +4,7 @@ import PageTitle from "../shared/components/PageTitle";
 import useWork from "./useWork";
 
 const WorksContainer = () => {
-  const { data, mode, calculateTimelinePosition, handleSwitchToggle } =
-    useWork();
+  const { data, mode, handleSwitchToggle } = useWork();
 
   return (
     <div className="max-w-4xl mx-auto p-4">
@@ -19,29 +18,10 @@ const WorksContainer = () => {
         Wanna see what I earned? <HiChatBubbleLeftEllipsis />
       </button> */}
 
-      <div className="relative mt-8">
-        <div className="absolute left-0 w-1 bg-gray-200 h-full"></div>
-
-        {data.map((item, index) => {
-          const { topPosition, height } = calculateTimelinePosition(item);
-
-          return (
-            <div key={index} className="relative mb-12">
-              <div
-                className={`absolute left-0 w-1 ${item.color}`}
-                style={{
-                  top: `${topPosition}%`,
-                  height: `${height}%`,
-                  minHeight: "2rem",
-                }}
-              ></div>
-
-              <div className="ml-8 relative">
-                <WorkCard {...item} />
-              </div>
-            </div>
-          );
-        })}
+      <div className="mt-12 space-y-12">
+        {data.map((item, index) => (
+          <WorkCard key={index} {...item} />
+        ))}
       </div>
     </div>
   );
