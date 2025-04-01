@@ -90,45 +90,11 @@ const useWork = () => {
     },
   ];
 
-  useEffect(() => {
-    const earliestDate = new Date(
-      Math.min(...data.map((item) => item.startDate.getTime())),
-    );
-    const latestDate = new Date(
-      Math.max(...data.map((item) => item.endDate.getTime())),
-    );
-
-    const months =
-      (latestDate.getFullYear() - earliestDate.getFullYear()) * 12 +
-      (latestDate.getMonth() - earliestDate.getMonth());
-
-    setTotalMonths(months);
-  }, []);
-
-  const calculateTimelinePosition = (item) => {
-    const earliestDate = new Date(
-      Math.min(...data.map((entry) => entry.startDate.getTime())),
-    );
-
-    const startMonths =
-      (item.startDate.getFullYear() - earliestDate.getFullYear()) * 12 +
-      (item.startDate.getMonth() - earliestDate.getMonth());
-
-    const durationMonths =
-      (item.endDate.getFullYear() - item.startDate.getFullYear()) * 12 +
-      (item.endDate.getMonth() - item.startDate.getMonth());
-
-    const topPosition = (startMonths / totalMonths) * 100;
-    const height = (durationMonths / totalMonths) * 100;
-
-    return { topPosition, height };
-  };
-
   const handleSwitchToggle = () => {
     setMode((prev) => (prev === "work" ? "thoughts" : "work"));
   };
 
-  return { data, mode, calculateTimelinePosition, handleSwitchToggle };
+  return { data, mode, handleSwitchToggle };
 };
 
 export default useWork;
